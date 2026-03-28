@@ -14,6 +14,7 @@ namespace SnakeClash.Resources
         [SerializeField] private List<int> milestoneLevels = new List<int> { 10, 20, 35, 50, 75, 100 };
         [SerializeField] private PlayerSnakeController player;
         [SerializeField] private OffScreenIndicator chestIndicator;
+        [SerializeField] private Transform initialSpawnPoint;
 
         private HashSet<int> _reachedMilestones = new HashSet<int>();
         private Queue<int> _pendingChests = new Queue<int>();
@@ -25,6 +26,11 @@ namespace SnakeClash.Resources
         {
             if (Instance == null) Instance = this;
             else Destroy(gameObject);
+        }
+
+        private void Start()
+        {
+            SpawnInitialChest();
         }
 
         private void Update()
@@ -55,13 +61,31 @@ namespace SnakeClash.Resources
             }
         }
 
-        private void SpawnChest()
+        private void SpawnInitialChest()
+        {
+            if (initialSpawnPoint != null)
+            {
+                SpawnChest(initialSpawnPoint.position);
+            }
+        }
+
+        private void SpawnChest(Vector3? fixedPosition = null)
         {
             if (chestPrefab == null) return;
             
-            float x = Random.Range(-20f, 20f);
-            float z = Random.Range(-20f, 20f);
-            _spawnedChest = Instantiate(chestPrefab, new Vector3(x, 0, z), Quaternion.identity, transform);
+            Vector3 spawnPos;
+            if (fixedPosition.HasValue)
+            {
+                spawnPos = fixedPosition.Value;
+            }
+            else
+            {
+                float x = Random.Range(-20f, 20f);
+                float z = Random.Range(-20f, 20f);
+                spawnPos = new Vector3(x, 0, z);
+            }
+
+            _spawnedChest = Instantiate(chestPrefab, spawnPos, Quaternion.identity, transform);
 
             if (chestIndicator != null)
             {

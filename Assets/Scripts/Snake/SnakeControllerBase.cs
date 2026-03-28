@@ -23,15 +23,24 @@ namespace SnakeClash.Snake
         public bool IsAlive => isAlive;
         public string SnakeName => snakeName;
         public int InitialSegments { get { return initialSegments; } set { initialSegments = value; } }
+        public float ScaleFactor => Mathf.Min(2f, 1.0f + (currentLevel / 50) * 0.1f);
 
         protected virtual void Start()
         {
             currentLevel = initialLevel;
+            UpdateScale();
+        }
+
+        public void UpdateScale()
+        {
+            float f = ScaleFactor;
+            transform.localScale = Vector3.one * f;
         }
 
         public virtual void AddLevel(int amount)
         {
             currentLevel += amount;
+            UpdateScale();
         }
 
         public virtual void Kill()

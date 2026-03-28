@@ -75,6 +75,10 @@ namespace SnakeClash.Snake
         public void AddSegment()
         {
             if (segmentPrefab == null) return;
+            
+            int limit = (GameManager.Instance != null) ? GameManager.Instance.MaxSegments : 100;
+            if (_activeSegments.Count >= limit) return;
+
             GameObject seg = Instantiate(segmentPrefab, transform);
             SnakeSegmentNode node = seg.GetComponent<SnakeSegmentNode>();
             if (node != null)

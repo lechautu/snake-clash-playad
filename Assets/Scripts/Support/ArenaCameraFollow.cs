@@ -1,4 +1,5 @@
 using UnityEngine;
+using SnakeClash.Snake;
 
 namespace SnakeClash.Support
 {
@@ -12,7 +13,11 @@ namespace SnakeClash.Support
         {
             if (target == null) return;
 
-            Vector3 desiredPosition = target.position + offset;
+            float zoomFactor = 1.0f;
+            var targetSnake = target.GetComponent<SnakeControllerBase>();
+            if (targetSnake != null) zoomFactor = targetSnake.ScaleFactor;
+
+            Vector3 desiredPosition = target.position + offset * zoomFactor;
             Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
             transform.position = smoothedPosition;
 

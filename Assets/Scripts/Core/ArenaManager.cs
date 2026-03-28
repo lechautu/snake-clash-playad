@@ -123,11 +123,32 @@ namespace SnakeClash.Core
         private Vector3 GetRandomSafePosition()
         {
             Vector3 pos = GetRandomArenaPosition();
+            float safeDistance = 20f;
             int attempts = 0;
-            while (playerSnake != null && Vector3.Distance(pos, playerSnake.transform.position) < 15f && attempts < 10)
+            bool isSafe = false;
+
+            while (!isSafe && attempts < 50)
             {
                 pos = GetRandomArenaPosition();
                 attempts++;
+                isSafe = true;
+
+                // Check distance from player
+                if (playerSnake != null && Vector3.Distance(pos, playerSnake.transform.position) < safeDistance)
+                {
+                    isSafe = false;
+                    continue;
+                }
+
+                // Check distance from other active AIs
+                foreach (var ai in _activeAIs)
+                {
+                    if (ai != null && Vector3.Distance(pos, ai.transform.position) < 5f)
+                    {
+                        isSafe = false;
+                        break;
+                    }
+                }
             }
             return pos;
         }

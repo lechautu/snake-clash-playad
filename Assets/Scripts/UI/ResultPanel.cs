@@ -83,23 +83,6 @@ namespace SnakeClash.UI
             if (retryButton != null)
             {
                 retryButton.gameObject.SetActive(true);
-                StartCoroutine(AnimateRetryButton());
-            }
-        }
-
-        private System.Collections.IEnumerator AnimateRetryButton()
-        {
-            if (retryButtonRoot == null) yield break;
-
-            float speed = 5f;
-            float amount = 0.08f;
-            Vector3 baseScale = Vector3.one;
-
-            while (true)
-            {
-                float pulse = Mathf.Sin(Time.time * speed) * amount;
-                retryButtonRoot.localScale = baseScale + new Vector3(pulse, pulse, pulse);
-                yield return null;
             }
         }
 

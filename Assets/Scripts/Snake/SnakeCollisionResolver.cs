@@ -17,19 +17,22 @@ namespace SnakeClash.Snake
         {
             if (!owner.IsAlive || GameManager.Instance.CurrentState != GameState.Playing) return;
 
+            float sf = owner.ScaleFactor;
+            float scaledResourceRadius = resourceRadius * sf;
+            float scaledCombatRadius = combatRadius * sf;
+            float scaledConsumeThreshold = 0.3f * sf;
+
             Vector3 headPos = transform.position;
 
             // 1. Resources (Food, Coins)
-            CheckResourceCollisions(headPos);
+            CheckResourceCollisions(headPos, scaledResourceRadius, scaledConsumeThreshold);
 
             // 2. Other Snakes
-            CheckSnakeCollisions(headPos);
+            CheckSnakeCollisions(headPos, scaledCombatRadius);
         }
 
-        private void CheckResourceCollisions(Vector3 headPos)
+        private void CheckResourceCollisions(Vector3 headPos, float radius, float consumeThreshold)
         {
-            float consumeThreshold = 0.3f;
-
             // Food
             if (FoodManager.Instance != null)
             {
@@ -37,7 +40,7 @@ namespace SnakeClash.Snake
                 for (int i = foodList.Count - 1; i >= 0; i--)
                 {
                     float dist = Vector3.Distance(headPos, foodList[i].transform.position);
-                    if (dist < resourceRadius)
+                    if (dist < radius)
                     {
                         if (dist < consumeThreshold)
                         {
@@ -64,7 +67,7 @@ namespace SnakeClash.Snake
                     for (int i = coinList.Count - 1; i >= 0; i--)
                     {
                         float dist = Vector3.Distance(headPos, coinList[i].transform.position);
-                        if (dist < resourceRadius)
+                        if (dist < radius)
                         {
                             if (dist < consumeThreshold)
                             {
@@ -84,7 +87,7 @@ namespace SnakeClash.Snake
                 // Chests
                 if (ChestManager.Instance != null && ChestManager.Instance.ActiveChest != null)
                 {
-                    if (Vector3.Distance(headPos, ChestManager.Instance.ActiveChest.transform.position) < resourceRadius)
+                    if (Vector3.Distance(headPos, ChestManager.Instance.ActiveChest.transform.position) < radius)
                     {
                         ChestPickup chest = ChestManager.Instance.ActiveChest.GetComponent<ChestPickup>();
                         if (chest != null) chest.Open();
@@ -93,7 +96,7 @@ namespace SnakeClash.Snake
             }
         }
 
-        private void CheckSnakeCollisions(Vector3 headPos)
+        private void CheckSnakeCollisions(Vector3 headPos, float radius)
         {
             var snakes = SnakeControllerBase.AllSnakes;
             foreach (var other in snakes)
@@ -101,7 +104,7 @@ namespace SnakeClash.Snake
                 if (other == owner || !other.IsAlive) continue;
 
                 // Head-to-Head
-                if (Vector3.Distance(headPos, other.transform.position) < combatRadius)
+                if (Vector3.Distance(headPos, other.transform.position) < radius)
                 {
                     ResolveHeadToHead(other);
                     continue; // Skip body check for this snake
@@ -116,7 +119,7 @@ namespace SnakeClash.Snake
                         var segments = body.ActiveSegments;
                         for (int i = 0; i < segments.Count; i++)
                         {
-                            if (Vector3.Distance(headPos, segments[i].transform.position) < combatRadius)
+                            if (Vector3.Distance(headPos, segments[i].transform.position) < radius)
                             {
                                 ResolveHeadToBody(segments[i]);
                                 break; // Done with this body
@@ -133,7 +136,7 @@ namespace SnakeClash.Snake
                         var segments = body.ActiveSegments;
                         for (int i = 0; i < segments.Count; i++)
                         {
-                            if (Vector3.Distance(headPos, segments[i].transform.position) < combatRadius)
+                            if (Vector3.Distance(headPos, segments[i].transform.position) < radius)
                             {
                                 BounceOwner(segments[i].transform.position);
                                 break;

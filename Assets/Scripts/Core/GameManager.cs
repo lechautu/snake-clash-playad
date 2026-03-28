@@ -9,6 +9,9 @@ namespace SnakeClash.Core
 
         [Header("Settings")]
         [SerializeField] private int winCoinTarget = 200;
+        [SerializeField] private int maxSegments = 50;
+
+        public int MaxSegments => maxSegments;
 
         [Header("Events")]
         public UnityEvent OnGameStart;
