@@ -1,0 +1,31 @@
+report@config:load 6.89
+Permissions were validated successfully.
+report@account:authorize 1482.96
+Exporting assets from Unity.......
+
+[ Stage1 ] Assets exported from Unity and staged for further processing
+report@unity:export 4012.99
+report@config:load 4.85
+Using /Users/tule/projects/snake-clash/snake-clash-playad-unity/Assets/TextMesh Pro/Fonts/LiberationSans.ttf file to generate an atlas for LiberationSans[48856] font
+  Using alphabet  ??1234567890-=qwertyuiop[]asdfghjkl;'\`zxcvbnm,./??!@#$%^&*()_+QWERTYUIOP{}ASDFGHJKL:"|~ZXCVBNM<>?
+Combined 97 glyphs into bitmap texture at /Users/tule/projects/snake-clash/snake-clash-playad-unity/LunaTemp/stage1/tmp/fonts/LiberationSans-48856/output_0.png (56kb)
+Found custom rules for texture Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+  {"maxWidth":512,"maxHeight":512,"format":"png32","compression":"none","quality":65,"script":"","ext":"","name":"Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset","isOverride":true}
+Found custom rules for texture Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset
+  {"maxWidth":512,"maxHeight":512,"format":"png32","compression":"none","quality":65,"script":"","ext":"","name":"Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset","isOverride":true}
+Resources:
+{}
+report@assets:stage2 15725.80
+report@assets:stage3 146.93
+[ Stage2 ] Assets postprocessed and bundled successfully
+report@config:unity 0.10
+report@config:load 15.93
+report@config:unity 0.12
+report@code:compose 72.60
+Authorized using stored user info.
+report@account:authorize 3.84
+[ error ] $MSBuild binary not found
+Error: MS_BUILD_PATH
+    at _0x54469d.checkMsBuildVersion (/Users/tule/Downloads/7.1.0/pipeline/Jakefile.js:6:2943177)
+    at async _0x54469d.compile (/Users/tule/Downloads/7.1.0/pipeline/Jakefile.js:6:2934559)
+    at async _0x52edbd.action (/Users/tule/Downloads/7.1.0/pipeline/Jakefile.js:6:2954624)
