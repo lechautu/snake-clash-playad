@@ -9,7 +9,7 @@ MemoryCaptures/
 /[Aa]ssets/AssetStoreTools*
 
 # Ignore Documentation
-/doc/
+/[Dd]ocs/
 
 # Visual Studio / Rider
 .vs/
