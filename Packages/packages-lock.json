@@ -124,12 +124,6 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
-    "com.unity.playworks.upp": {
-      "version": "file:../../../../Downloads/7.1.0/scripts",
-      "depth": 0,
-      "source": "local",
-      "dependencies": {}
-    },
     "com.unity.render-pipelines.core": {
       "version": "17.0.4",
       "depth": 1,
