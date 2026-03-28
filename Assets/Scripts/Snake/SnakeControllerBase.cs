@@ -22,6 +22,7 @@ namespace SnakeClash.Snake
         public int CurrentLevel => currentLevel;
         public bool IsAlive => isAlive;
         public string SnakeName => snakeName;
+        public int InitialSegments { get { return initialSegments; } set { initialSegments = value; } }
 
         protected virtual void Start()
         {

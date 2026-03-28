@@ -13,6 +13,30 @@ namespace SnakeClash.Snake
         [SerializeField] private SnakeBodyController bodyController;
         [SerializeField] private AISnakeBrain brain;
 
+        private bool _isInitialized = false;
+
+        public void Initialize(int level, int segments)
+        {
+            initialLevel = level;
+            initialSegments = segments;
+            currentLevel = level;
+            _isInitialized = true;
+        }
+
+        protected override void Start()
+        {
+            if (!_isInitialized)
+            {
+                var player = Object.FindFirstObjectByType<PlayerSnakeController>();
+                if (player != null)
+                {
+                    initialLevel = player.CurrentLevel;
+                    initialSegments = player.CurrentLevel;
+                }
+            }
+            base.Start();
+        }
+
         private void Update()
         {
             if (!isAlive || GameManager.Instance.CurrentState != GameState.Playing) return;
@@ -42,7 +66,10 @@ namespace SnakeClash.Snake
         {
             base.Kill();
             if (bodyController != null) bodyController.OnDeath();
-            // Optional: Respawn logic if needed, but for MVP AI can just stay dead
+            
+            // Move away to avoid ghost collisions
+            transform.position += Vector3.down * 100f;
+
             Destroy(gameObject, 2f);
         }
     }

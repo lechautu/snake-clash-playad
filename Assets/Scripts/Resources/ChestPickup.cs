@@ -1,4 +1,5 @@
 using UnityEngine;
+using SnakeClash.Core;
 
 namespace SnakeClash.Resources
 {
@@ -8,11 +9,14 @@ namespace SnakeClash.Resources
         [SerializeField] private int coinsPerChest = 20;
         [SerializeField] private float burstRange = 4f;
         [SerializeField] private float burstTotalDuration = 0.5f;
+        [SerializeField] private Animator animator;
 
         private bool _isOpening = false;
 
         private void Start()
         {
+            if (animator == null) animator = GetComponent<Animator>();
+            
             // Reset state for potential reuse/pooling
             transform.localScale = Vector3.one;
         }
@@ -21,6 +25,16 @@ namespace SnakeClash.Resources
         {
             if (_isOpening) return;
             _isOpening = true;
+
+            if (animator != null)
+            {
+                animator.SetTrigger("OpenTrigger");
+            }
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayChestOpenSound();
+            }
 
             StartCoroutine(OpenSequence());
         }

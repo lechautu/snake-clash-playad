@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using SnakeClash.Snake;
+using System.Text;
 
 namespace SnakeClash.UI
 {
@@ -12,13 +13,18 @@ namespace SnakeClash.UI
 
         [SerializeField] private Transform camTransform;
 
+        StringBuilder sb = new StringBuilder();
+
         private void Start()
         {
-            if (camTransform == null)
+            if (camTransform == null && Camera.main != null)
                 camTransform = Camera.main.transform;
             
             if (owner == null)
                 owner = GetComponentInParent<SnakeControllerBase>();
+            
+            if (levelText == null)
+                levelText = GetComponent<TextMeshPro>();
         }
 
         private void LateUpdate()
@@ -26,10 +32,12 @@ namespace SnakeClash.UI
             // Update Text
             if (owner != null && levelText != null)
             {
-                levelText.text = owner.CurrentLevel.ToString();
+                sb.Clear();
+                sb.Append("Lv");
+                sb.Append(owner.CurrentLevel);
+                levelText.text = sb.ToString();
             }
 
-            // Billboard logic
             if (camTransform != null)
             {
                 transform.rotation = camTransform.rotation;

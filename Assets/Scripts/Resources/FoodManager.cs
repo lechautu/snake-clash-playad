@@ -48,7 +48,12 @@ namespace SnakeClash.Resources
             if (_activeFood.Remove(food))
             {
                 _foodPool.Return(food);
-                SpawnAmbientFood();
+                
+                // Only spawn new natural food if we are below the limit
+                if (_activeFood.Count < maxAmbientFood)
+                {
+                    SpawnAmbientFood();
+                }
             }
         }
 

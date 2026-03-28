@@ -4,20 +4,29 @@ namespace SnakeClash.Snake
 {
     public class SnakeSegmentNode : MonoBehaviour
     {
-        [Header("References")]
-        [SerializeField] private SnakeBodyController owner;
+        [Header("Visuals")]
+        [SerializeField] private GameObject bodyVisual;
+        [SerializeField] private GameObject tailVisual;
+
+        private SnakeBodyController _owner;
 
         public void SetOwner(SnakeBodyController bodyOwner)
         {
-            owner = bodyOwner;
+            _owner = bodyOwner;
+        }
+
+        public void RefreshVisual(bool asTail)
+        {
+            if (bodyVisual != null) bodyVisual.SetActive(!asTail);
+            if (tailVisual != null) tailVisual.SetActive(asTail);
         }
 
         public void OnPickup()
         {
             // Triggered via CollisionResolver
-            if (owner != null)
+            if (_owner != null)
             {
-                owner.OnSegmentConsumed(this);
+                _owner.OnSegmentConsumed(this);
             }
         }
     }

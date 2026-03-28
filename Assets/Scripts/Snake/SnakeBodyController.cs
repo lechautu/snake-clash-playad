@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SnakeClash.Core;
+using SnakeClash.Resources;
 
 namespace SnakeClash.Snake
 {
     public class SnakeBodyController : MonoBehaviour
     {
         [Header("References")]
+        [SerializeField] private GameObject headVisual;
         [SerializeField] private GameObject segmentPrefab;
         [SerializeField] private Transform headTransform;
 
@@ -22,7 +24,13 @@ namespace SnakeClash.Snake
         {
             if (headTransform == null) headTransform = transform;
             _positionHistory.Add(headTransform.position);
-            for (int i = 0; i < initialSegments; i++) AddSegment();
+
+            // Inherit initial segments from owner if available
+            SnakeControllerBase owner = GetComponent<SnakeControllerBase>();
+            int count = (owner != null) ? owner.InitialSegments : initialSegments;
+
+            for (int i = 0; i < count; i++) AddSegment();
+            RefreshAllSegments();
         }
 
         private void Update()
@@ -73,6 +81,16 @@ namespace SnakeClash.Snake
             {
                 node.SetOwner(this);
                 _activeSegments.Add(node);
+                RefreshAllSegments();
+            }
+        }
+
+        private void RefreshAllSegments()
+        {
+            for (int i = 0; i < _activeSegments.Count; i++)
+            {
+                bool isTail = (i == _activeSegments.Count - 1);
+                _activeSegments[i].RefreshVisual(isTail);
             }
         }
 
@@ -84,15 +102,38 @@ namespace SnakeClash.Snake
             for (int i = _activeSegments.Count - 1; i >= index; i--)
             {
                 SnakeSegmentNode toRemove = _activeSegments[i];
+                Vector3 pos = toRemove.transform.position;
                 _activeSegments.RemoveAt(i);
-                // Future: FoodManager.Instance.CreateFoodFromNode(toRemove);
+                
+                // Convert back to food
+                if (FoodManager.Instance != null)
+                {
+                    FoodManager.Instance.CreateFoodFromNode(pos);
+                }
+
                 Destroy(toRemove.gameObject);
             }
+
+            RefreshAllSegments();
         }
 
         public void OnDeath()
         {
-            foreach (var seg in _activeSegments) Destroy(seg.gameObject);
+            if (headVisual != null) headVisual.SetActive(false);
+
+            // Hide the actual root visual container or any Level UI children
+            foreach (Transform child in transform) {
+                child.gameObject.SetActive(false);
+            }
+
+            foreach (var seg in _activeSegments)
+            {
+                if (FoodManager.Instance != null)
+                {
+                    FoodManager.Instance.CreateFoodFromNode(seg.transform.position);
+                }
+                Destroy(seg.gameObject);
+            }
             _activeSegments.Clear();
         }
     }

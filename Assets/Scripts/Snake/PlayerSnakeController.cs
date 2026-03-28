@@ -15,7 +15,19 @@ namespace SnakeClash.Snake
 
         private void Update()
         {
-            if (!isAlive || GameManager.Instance.CurrentState != GameState.Playing) return;
+            if (!isAlive) return;
+
+            // Trigger game start on joystick movement
+            if (GameManager.Instance.CurrentState == GameState.Ready)
+            {
+                if (VirtualJoystickInput.GetInput() != Vector2.zero)
+                {
+                    GameManager.Instance.StartGame();
+                }
+                return;
+            }
+
+            if (GameManager.Instance.CurrentState != GameState.Playing) return;
 
             // Auto-forward
             transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
@@ -52,6 +64,7 @@ namespace SnakeClash.Snake
             {
                 bodyController.OnDeath();
             }
+
             GameManager.Instance.SetState(GameState.Fail);
         }
     }

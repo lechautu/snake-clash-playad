@@ -36,7 +36,7 @@ namespace SnakeClash.Core
 
         private void Start()
         {
-            SetState(GameState.Playing);
+            SetState(GameState.Ready);
         }
 
         public void SetState(GameState newState)

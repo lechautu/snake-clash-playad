@@ -61,7 +61,7 @@ namespace SnakeClash.Resources
             
             float x = Random.Range(-20f, 20f);
             float z = Random.Range(-20f, 20f);
-            _spawnedChest = Instantiate(chestPrefab, new Vector3(x, 0.5f, z), Quaternion.identity, transform);
+            _spawnedChest = Instantiate(chestPrefab, new Vector3(x, 0, z), Quaternion.identity, transform);
 
             if (chestIndicator != null)
             {

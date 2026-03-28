@@ -23,6 +23,7 @@ namespace SnakeClash.Core
         [SerializeField] private SnakeControllerBase playerSnake;
 
         private List<AISnakeController> _activeAIs = new List<AISnakeController>();
+        private int _totalSpawnCount = 0;
 
         private void Awake()
         {
@@ -44,6 +45,26 @@ namespace SnakeClash.Core
             }
         }
 
+        private void Update()
+        {
+            if (GameManager.Instance.CurrentState != GameState.Playing) return;
+
+            // 1. Clean up dead AI
+            for (int i = _activeAIs.Count - 1; i >= 0; i--)
+            {
+                if (_activeAIs[i] == null || !_activeAIs[i].IsAlive)
+                {
+                    _activeAIs.RemoveAt(i);
+                }
+            }
+
+            // 2. Replenish
+            if (_activeAIs.Count < aiCount)
+            {
+                SpawnOneAI();
+            }
+        }
+
         private void OnGameStart()
         {
             SpawnAIs();
@@ -52,20 +73,63 @@ namespace SnakeClash.Core
         private void SpawnAIs()
         {
             if (aiSnakePrefab == null) return;
-
-            for (int i = 0; i < aiCount; i++)
+            while (_activeAIs.Count < aiCount)
             {
-                Vector3 spawnPos = GetRandomArenaPosition();
-                // Ensure not too close to player
-                if (playerSnake != null && Vector3.Distance(spawnPos, playerSnake.transform.position) < 10f)
-                {
-                    i--;
-                    continue;
-                }
-
-                AISnakeController ai = Instantiate(aiSnakePrefab, spawnPos, Quaternion.Euler(0, Random.Range(0, 360), 0), transform);
-                _activeAIs.Add(ai);
+                SpawnOneAI();
             }
+        }
+
+        private void SpawnOneAI()
+        {
+            if (aiSnakePrefab == null) return;
+
+            Vector3 spawnPos = GetRandomSafePosition();
+            AISnakeController ai = Instantiate(aiSnakePrefab, spawnPos, Quaternion.Euler(0, Random.Range(0, 360), 0), transform);
+            
+            // Tiered Spawning Logic
+            int playerLevel = (playerSnake != null) ? playerSnake.CurrentLevel : 1;
+            int aiLevel = playerLevel;
+            
+            _totalSpawnCount++;
+
+            if (playerLevel < 15)
+            {
+                aiLevel = playerLevel;
+            }
+            else
+            {
+                // Every 5th snake is an Elite (+10 levels)
+                if (_totalSpawnCount % 5 == 0)
+                {
+                    aiLevel = playerLevel + 10;
+                }
+                else
+                {
+                    aiLevel = Random.Range(playerLevel - 10, playerLevel + 1);
+                }
+            }
+
+            // Segment scaling rule
+            int segments = aiLevel;
+            if (aiLevel > 20)
+            {
+                segments = Random.Range(15, 21);
+            }
+
+            ai.Initialize(aiLevel, segments);
+            _activeAIs.Add(ai);
+        }
+
+        private Vector3 GetRandomSafePosition()
+        {
+            Vector3 pos = GetRandomArenaPosition();
+            int attempts = 0;
+            while (playerSnake != null && Vector3.Distance(pos, playerSnake.transform.position) < 15f && attempts < 10)
+            {
+                pos = GetRandomArenaPosition();
+                attempts++;
+            }
+            return pos;
         }
 
         private Vector3 GetRandomArenaPosition()
