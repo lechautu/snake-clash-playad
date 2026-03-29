@@ -24,7 +24,7 @@ A high-performance playable ad prototype of **Snake Clash** developed in Unity. 
 - **Luna Integration**: Pre-configured for Luna Playable builds with optimized shader pragmas.
 
 ## 🚀 Getting Started
-1. **Clone**: `git clone [repository-url]`
+1. **Clone**: `git clone https://github.com/lechautu/snake-clash-playad.git`
 2. **Open**: Use Unity Hub to open the project with **Unity 6000.0**.
 3. **Configuration**:
    - Ensure the **Luna** plugin is correctly initialized.
