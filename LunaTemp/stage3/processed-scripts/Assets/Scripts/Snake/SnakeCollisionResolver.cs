@@ -31,7 +31,7 @@ namespace SnakeClash.Snake
             CheckSnakeCollisions(headPos, scaledCombatRadius);
         }
 
-        private void CheckResourceCollisions(Vector3 headPos, float radius, float consumeThreshold)
+        private void CheckResourceCollisions([Bridge.Ref] Vector3 headPos, float radius, float consumeThreshold)
         {
             // Food
             if (FoodManager.Instance != null)
@@ -90,13 +90,13 @@ namespace SnakeClash.Snake
                     if (Vector3.Distance(headPos, ChestManager.Instance.ActiveChest.transform.position) < radius)
                     {
                         ChestPickup chest = ChestManager.Instance.ActiveChest.GetComponent<ChestPickup>();
-                        if (chest != null) chest.Open();
+                        if (chest != null) chest.Open(owner.CurrentLevel);
                     }
                 }
             }
         }
 
-        private void CheckSnakeCollisions(Vector3 headPos, float radius)
+        private void CheckSnakeCollisions([Bridge.Ref] Vector3 headPos, float radius)
         {
             var snakes = SnakeControllerBase.AllSnakes;
             foreach (var other in snakes)

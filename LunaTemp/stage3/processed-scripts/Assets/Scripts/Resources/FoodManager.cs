@@ -57,7 +57,7 @@ namespace SnakeClash.Resources
             }
         }
 
-        public void CreateFoodFromNode(Vector3 position)
+        public void CreateFoodFromNode([Bridge.Ref] Vector3 position)
         {
             FoodItem food = _foodPool.Get();
             food.transform.position = position;

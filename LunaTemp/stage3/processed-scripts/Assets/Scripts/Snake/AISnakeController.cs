@@ -27,7 +27,7 @@ namespace SnakeClash.Snake
         {
             if (!_isInitialized)
             {
-                var player = Object.FindFirstObjectByType<PlayerSnakeController>();
+                var player = GameManager.Instance.PlayerSnakeController;
                 if (player != null)
                 {
                     initialLevel = player.CurrentLevel;
@@ -43,7 +43,7 @@ namespace SnakeClash.Snake
 
             // Simple move forward
             transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
-            
+
             // Boundary clamping
             transform.position = ArenaManager.Instance.ClampToArena(transform.position);
 
@@ -66,7 +66,7 @@ namespace SnakeClash.Snake
         {
             base.Kill();
             if (bodyController != null) bodyController.OnDeath();
-            
+
             // Move away to avoid ghost collisions
             transform.position += Vector3.down * 100f;
 

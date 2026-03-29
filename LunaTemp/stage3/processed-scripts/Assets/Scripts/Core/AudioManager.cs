@@ -17,6 +17,7 @@ namespace SnakeClash.Core
         [SerializeField] private AudioClip winClip;
         [SerializeField] private AudioClip killClip;
         [SerializeField] private AudioClip loseClip;
+        [SerializeField] private AudioClip growClip;
         
         private List<AudioSource> _audioSourcePool;
 
@@ -82,6 +83,14 @@ namespace SnakeClash.Core
             if (loseClip != null)
             {
                 PlayClip(loseClip);
+            }
+        }
+
+        public void PlayGrowSound()
+        {
+            if (growClip != null)
+            {
+                PlayClip(growClip);
             }
         }
 

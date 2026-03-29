@@ -50,10 +50,21 @@ namespace SnakeClash.Snake
 
         public override void AddLevel(int amount)
         {
+            float prevScale = ScaleFactor;
             base.AddLevel(amount);
+            
             if (bodyController != null)
             {
                 bodyController.AddSegment();
+            }
+
+            // Only play grow sound if the visual scale factor actually increased
+            if (ScaleFactor > prevScale)
+            {
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayGrowSound();
+                }
             }
         }
 

@@ -15,7 +15,10 @@ namespace SnakeClash.Resources
         [SerializeField] private OffScreenIndicator chestIndicator;
         [SerializeField] private Transform initialSpawnPoint;
 
-        [LunaPlaygroundField("Level Require Increment", 50, "Chest Settings")] public int levelRequireIncrement = 50;
+#if LUNA_PLAYABLE
+        [LunaPlaygroundField("Level Require Increment", 50, "Chest Settings")]
+#endif
+        public int levelRequireIncrement = 50;
 
 
         private GameObject _spawnedChest = null;

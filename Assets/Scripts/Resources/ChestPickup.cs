@@ -7,7 +7,10 @@ namespace SnakeClash.Resources
     public class ChestPickup : MonoBehaviour
     {
         [Header("Settings")]
-        [LunaPlaygroundField("Coins Per Chest", 20, "Chest Settings")] public int coinsPerChest = 20;
+#if LUNA_PLAYABLE
+        [LunaPlaygroundField("Coins Per Chest", 20, "Chest Settings")]
+#endif
+        public int coinsPerChest = 20;
         [SerializeField] private float burstRange = 4f;
         [SerializeField] private float burstTotalDuration = 0.5f;
         [SerializeField] private Animator animator;

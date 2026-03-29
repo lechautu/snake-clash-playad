@@ -827,7 +827,7 @@ PlayerSettings:
   webWasm2023: 0
   scriptingDefineSymbols:
     Standalone: LUNA_PLAYABLE
-    WebGL: LUNA_PLAYABLE
+    WebGL: 
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

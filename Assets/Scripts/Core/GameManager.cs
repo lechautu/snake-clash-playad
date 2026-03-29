@@ -16,7 +16,10 @@ namespace SnakeClash.Core
         public Camera MainCamera => mainCamera;
 
         [Header("Settings")]
-        [LunaPlaygroundField("Win Coin Target", 200, "Game Settings")] public int winCoinTarget = 200;
+#if LUNA_PLAYABLE
+        [LunaPlaygroundField("Win Coin Target", 200, "Game Settings")]
+#endif
+        public int winCoinTarget = 200;
         [SerializeField] private int maxSegments = 50;
 
         public int MaxSegments => maxSegments;

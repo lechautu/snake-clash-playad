@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -777816280, guid: a7fd3acd51ab64d78838325169a94578, type: 3}
+  m_Script: {fileID: -777816280, guid: e32554d5bca665047abc66f03c8ba21c, type: 3}
   m_Name: SVC_Luna
   m_EditorClassIdentifier: EditorScripts.dll::Luna.Unity.Utils.Shaders.LunaSVC
   _svcLunaVersion: 3
@@ -474,7 +474,44 @@ MonoBehaviour:
     keywords:
     - _
     - __
-  version: 230
+  - shaderCompilerPlatform: 5
+    shader: {fileID: 4800000, guid: 3c1d62a14e1616f4ebaf8966b9e21fdf, type: 3}
+    passType: 0
+    passId: 0
+    subShaderIndex: 0
+    upToDate: 1
+    keywords: []
+  - shaderCompilerPlatform: 5
+    shader: {fileID: 10770, guid: 0000000000000000f000000000000000, type: 0}
+    passType: 0
+    passId: 0
+    subShaderIndex: 0
+    upToDate: 1
+    keywords: []
+  - shaderCompilerPlatform: 5
+    shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
+    passType: 0
+    passId: 0
+    subShaderIndex: 0
+    upToDate: 1
+    keywords: []
+  - shaderCompilerPlatform: 5
+    shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
+    passType: 0
+    passId: 0
+    subShaderIndex: 0
+    upToDate: 1
+    keywords:
+    - OUTLINE_ON
+  - shaderCompilerPlatform: 5
+    shader: {fileID: 106, guid: 0000000000000000f000000000000000, type: 0}
+    passType: 0
+    passId: 0
+    subShaderIndex: 0
+    upToDate: 1
+    keywords:
+    - _SUNDISK_SIMPLE
+  version: 248
   _shaderParsedShaders:
   - ParsedSubShaders:
     - Index: 0

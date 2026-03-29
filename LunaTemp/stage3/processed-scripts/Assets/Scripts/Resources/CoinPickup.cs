@@ -12,7 +12,7 @@ namespace SnakeClash.Resources
             GameManager.Instance.AddCoins(coinValue);
         }
 
-        public void StartTossAnimation(Vector3 targetPos, float duration)
+        public void StartTossAnimation([Bridge.Ref] Vector3 targetPos, float duration)
         {
             StartCoroutine(TossCoroutine(targetPos, duration));
         }

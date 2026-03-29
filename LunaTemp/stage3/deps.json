@@ -1,0 +1,54 @@
+{
+  "ignores": [],
+  "groups": [
+    [
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/Core/ArenaManager.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/Snake/AISnakeBrain.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/Snake/AISnakeController.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/Snake/SnakeControllerBase.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/Resources/FoodItem.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/Resources/FoodManager.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/Snake/SnakeBodyController.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/Snake/PlayerSnakeController.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/Core/GameManager.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/Resources/ChestManager.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/Snake/SnakeCollisionResolver.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/Core/GameState.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/Core/AudioManager.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/Resources/ChestPickup.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/Resources/CoinManager.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/Resources/CoinPickup.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/Support/ObjectPool.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/UI/ResultPanel.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/Snake/SnakeSegmentNode.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/UI/OffScreenIndicator.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/Support/LunaCTA.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/UI/HUDController.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/UI/SnakeLevelUI.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/UI/VirtualJoystickInput.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/UI/VirtualJoystickView.cs",
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/Support/ArenaCameraFollow.cs"
+    ],
+    [
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/UI/MoveOnYLoop.cs"
+    ],
+    [
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/UI/PulseOnScale.cs"
+    ],
+    [
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/Scripts/UI/RotateOnZ.cs"
+    ],
+    [
+      "D:/Projects/snake-clash-playad/LunaTemp/stage3/processed-scripts/Assets/TutorialInfo/Scripts/Readme.cs"
+    ],
+    [
+      "E:/7.1.0/pipeline/templates/LunaCompiler/Scripts/Properties/AssemblyInfo.cs"
+    ],
+    [
+      "E:/7.1.0/pipeline/templates/LunaCompiler/Scripts/Sources/OtherDummyScript.cs"
+    ],
+    [
+      "E:/7.1.0/pipeline/templates/LunaCompiler/Scripts/obj/Debug/.NETFramework,Version=v4.7.AssemblyAttributes.cs"
+    ]
+  ]
+}

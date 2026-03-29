@@ -169,7 +169,7 @@ namespace SnakeClash.Core
             return position;
         }
 
-        public bool IsOutOfBounds(Vector3 position)
+        public bool IsOutOfBounds([Bridge.Ref] Vector3 position)
         {
             float halfX = arenaSize.x * 0.5f;
             float halfY = arenaSize.y * 0.5f;

@@ -30,7 +30,7 @@ namespace SnakeClash.Resources
             }
         }
 
-        public void SpawnCoinBurst(Vector3 origin, int amount, float burstRange = 2f)
+        public void SpawnCoinBurst([Bridge.Ref] Vector3 origin, int amount, float burstRange = 2f)
         {
             for (int i = 0; i < amount; i++)
             {
