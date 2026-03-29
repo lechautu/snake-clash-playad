@@ -8,10 +8,10 @@ namespace SnakeClash.UI
     {
         [Header("References")]
         [SerializeField] private RectTransform container;
-        [SerializeField] private RectTransform handle;
+        [SerializeField] private RectTransform joystickHandle;
 
         [Header("Settings")]
-        [SerializeField] private float handleLimit = 1.0f;
+        [SerializeField] private float joystickLimit = 1.0f;
 
         private Vector2 _joystickPosition = Vector2.zero;
         private Canvas _parentCanvas;
@@ -43,19 +43,19 @@ namespace SnakeClash.UI
             Vector2 radius = container.sizeDelta / 2;
             _joystickPosition = (eventData.position - position) / (radius * _parentCanvas.scaleFactor);
 
-            HandleInput(_joystickPosition.magnitude, _joystickPosition.normalized);
-            handle.anchoredPosition = _joystickPosition * radius * handleLimit;
+            UpdateJoystickInput(_joystickPosition.magnitude, _joystickPosition.normalized);
+            joystickHandle.anchoredPosition = _joystickPosition * radius * joystickLimit;
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
             _joystickPosition = Vector2.zero;
-            handle.anchoredPosition = Vector2.zero;
+            joystickHandle.anchoredPosition = Vector2.zero;
             VirtualJoystickInput.Reset();
             if (container != null) container.gameObject.SetActive(false);
         }
 
-        private void HandleInput(float magnitude, Vector2 normalized)
+        private void UpdateJoystickInput(float magnitude, Vector2 normalized)
         {
             if (magnitude > 1.0f)
             {

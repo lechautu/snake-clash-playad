@@ -1,5 +1,6 @@
 using UnityEngine;
 using SnakeClash.Core;
+using TMPro;
 
 namespace SnakeClash.Resources
 {
@@ -10,20 +11,62 @@ namespace SnakeClash.Resources
         [SerializeField] private float burstRange = 4f;
         [SerializeField] private float burstTotalDuration = 0.5f;
         [SerializeField] private Animator animator;
+        [SerializeField] private TextMeshPro levelText;
+        [SerializeField] private Transform camTransform;
 
         private bool _isOpening = false;
+        private int _requiredLevel = 0;
+        
+        public int RequiredLevel => _requiredLevel;
+
+        public void Initialize(int level)
+        {
+            _requiredLevel = level;
+            if (levelText != null)
+            {
+                levelText.text = "Lv " + level;
+            }
+        }
+
+        private void Awake()
+        {
+            if (levelText == null)
+                levelText = GetComponentInChildren<TextMeshPro>();
+        }
 
         private void Start()
         {
+            if (camTransform == null && GameManager.Instance != null && GameManager.Instance.MainCamera != null)
+                camTransform = GameManager.Instance.MainCamera.transform;
+
             if (animator == null) animator = GetComponent<Animator>();
             
             // Reset state for potential reuse/pooling
             transform.localScale = Vector3.one;
         }
 
-        public void Open()
+        private void Update()
         {
-            if (_isOpening) return;
+            if (_isOpening || levelText == null) return;
+
+            if (GameManager.Instance != null && GameManager.Instance.PlayerSnakeController != null)
+            {
+                int playerLevel = GameManager.Instance.PlayerSnakeController.CurrentLevel;
+                levelText.color = (playerLevel >= _requiredLevel) ? Color.white : Color.red;
+            }
+        }
+
+        private void LateUpdate()
+        {
+            if (camTransform != null && levelText != null)
+            {
+                levelText.transform.rotation = camTransform.rotation;
+            }
+        }
+
+        public void Open(int playerLevel)
+        {
+            if (_isOpening || playerLevel < _requiredLevel) return;
             _isOpening = true;
 
             if (animator != null)

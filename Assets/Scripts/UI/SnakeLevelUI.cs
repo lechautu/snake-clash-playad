@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using SnakeClash.Snake;
+using SnakeClash.Core;
 using System.Text;
 
 namespace SnakeClash.UI
@@ -17,25 +18,38 @@ namespace SnakeClash.UI
 
         private void Start()
         {
-            if (camTransform == null && Camera.main != null)
-                camTransform = Camera.main.transform;
-            
+            if (camTransform == null && GameManager.Instance != null)
+                camTransform = GameManager.Instance.MainCamera.transform;
+
             if (owner == null)
                 owner = GetComponentInParent<SnakeControllerBase>();
-            
+
             if (levelText == null)
                 levelText = GetComponent<TextMeshPro>();
         }
 
         private void LateUpdate()
         {
+            if (owner == null || levelText == null) return;
+
             // Update Text
-            if (owner != null && levelText != null)
+            sb.Clear();
+            sb.Append("Lv");
+            sb.Append(owner.CurrentLevel);
+            levelText.text = sb.ToString();
+
+            // Highlight if level is higher than player
+            if (GameManager.Instance != null && GameManager.Instance.PlayerSnakeController != null)
             {
-                sb.Clear();
-                sb.Append("Lv");
-                sb.Append(owner.CurrentLevel);
-                levelText.text = sb.ToString();
+                int playerLevel = GameManager.Instance.PlayerSnakeController.CurrentLevel;
+                if (owner.CurrentLevel > playerLevel)
+                {
+                    levelText.color = Color.red;
+                }
+                else
+                {
+                    levelText.color = Color.white;
+                }
             }
 
             if (camTransform != null)

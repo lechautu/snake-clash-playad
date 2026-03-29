@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using SnakeClash.Core;
 
 namespace SnakeClash.UI
 {
@@ -23,7 +24,7 @@ namespace SnakeClash.UI
 
         private void Start()
         {
-            if (mainCam == null) mainCam = Camera.main;
+            if (mainCam == null && GameManager.Instance != null) mainCam = GameManager.Instance.MainCamera;
             _rectTransform = GetComponent<RectTransform>();
             if (iconImage == null) iconImage = GetComponentInChildren<Image>();
             

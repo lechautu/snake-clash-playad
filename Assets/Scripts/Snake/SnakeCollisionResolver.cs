@@ -90,7 +90,7 @@ namespace SnakeClash.Snake
                     if (Vector3.Distance(headPos, ChestManager.Instance.ActiveChest.transform.position) < radius)
                     {
                         ChestPickup chest = ChestManager.Instance.ActiveChest.GetComponent<ChestPickup>();
-                        if (chest != null) chest.Open();
+                        if (chest != null) chest.Open(owner.CurrentLevel);
                     }
                 }
             }

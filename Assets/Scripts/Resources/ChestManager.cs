@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SnakeClash.Snake;
+using SnakeClash.Core;
 using SnakeClash.UI;
 
 namespace SnakeClash.Resources
@@ -11,16 +12,15 @@ namespace SnakeClash.Resources
 
         [Header("Settings")]
         [SerializeField] private GameObject chestPrefab;
-        [SerializeField] private List<int> milestoneLevels = new List<int> { 10, 20, 35, 50, 75, 100 };
         [SerializeField] private PlayerSnakeController player;
         [SerializeField] private OffScreenIndicator chestIndicator;
         [SerializeField] private Transform initialSpawnPoint;
 
-        private HashSet<int> _reachedMilestones = new HashSet<int>();
-        private Queue<int> _pendingChests = new Queue<int>();
         private GameObject _spawnedChest = null;
         public GameObject ActiveChest => _spawnedChest;
-        private int _lastCheckLevel = 0;
+        
+        private int _currentLevelRequirement = 5;
+        public int CurrentLevelRequirement => _currentLevelRequirement;
 
         private void Awake()
         {
@@ -35,31 +35,15 @@ namespace SnakeClash.Resources
 
         private void Update()
         {
-            if (player == null) return;
-            if (player.CurrentLevel == _lastCheckLevel) return;
+            if (GameManager.Instance.CurrentState != GameState.Playing) return;
 
-            _lastCheckLevel = player.CurrentLevel;
-            CheckMilestones();
-
-            // Only spawn a new chest if one doesn't exist AND we have pending milestones
-            if (_spawnedChest == null && _pendingChests.Count > 0)
+            // Only spawn a new chest if one doesn't exist
+            if (_spawnedChest == null)
             {
-                _pendingChests.Dequeue();
                 SpawnChest();
             }
         }
 
-        private void CheckMilestones()
-        {
-            foreach (int milestone in milestoneLevels)
-            {
-                if (_lastCheckLevel >= milestone && !_reachedMilestones.Contains(milestone))
-                {
-                    _reachedMilestones.Add(milestone);
-                    _pendingChests.Enqueue(milestone);
-                }
-            }
-        }
 
         private void SpawnInitialChest()
         {
@@ -86,6 +70,15 @@ namespace SnakeClash.Resources
             }
 
             _spawnedChest = Instantiate(chestPrefab, spawnPos, Quaternion.identity, transform);
+            
+            ChestPickup chest = _spawnedChest.GetComponent<ChestPickup>();
+            if (chest != null)
+            {
+                chest.Initialize(_currentLevelRequirement);
+            }
+
+            // Increase requirement for NEXT chest
+            _currentLevelRequirement += 50;
 
             if (chestIndicator != null)
             {

@@ -34,8 +34,8 @@ namespace SnakeClash.Snake
         {
             // 1. Determine preferred direction
             Vector3 preferredHeading = _currentHeading;
-            var player = Object.FindFirstObjectByType<PlayerSnakeController>();
-            
+            var player = GameManager.Instance.PlayerSnakeController;
+
             if (player != null && player.IsAlive && owner != null)
             {
                 float dist = Vector3.Distance(transform.position, player.transform.position);

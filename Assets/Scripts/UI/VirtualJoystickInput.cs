@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace SnakeClash.UI
 {
@@ -17,16 +16,8 @@ namespace SnakeClash.UI
 
         public static Vector2 GetInput()
         {
-            // Support WASD/Arrows for editor testing via New Input System
-            Vector2 keyboardInput = Vector2.zero;
-            var keyboard = Keyboard.current;
-            if (keyboard != null)
-            {
-                if (keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed) keyboardInput.y += 1;
-                if (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed) keyboardInput.y -= 1;
-                if (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed) keyboardInput.x -= 1;
-                if (keyboard.dKey.isPressed || keyboard.rightArrowKey.isPressed) keyboardInput.x += 1;
-            }
+            // Support WASD/Arrows for editor testing via Standalone Input
+            Vector2 keyboardInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
             if (keyboardInput != Vector2.zero)
             {
