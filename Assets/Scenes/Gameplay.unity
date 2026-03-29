@@ -1391,9 +1391,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SnakeClash.Resources.ChestManager
   chestPrefab: {fileID: 8358590560563976854, guid: 62c77ab1c484c403cbf8a042b745b181, type: 3}
-  player: {fileID: 1107172863}
   chestIndicator: {fileID: 925507813}
   initialSpawnPoint: {fileID: 149002086}
+  levelRequireIncrement: 50
 --- !u!4 &783892289
 Transform:
   m_ObjectHideFlags: 0
@@ -3377,6 +3377,7 @@ MonoBehaviour:
   winClip: {fileID: 8300000, guid: fd8e8dc274bbf4b70bf554052c9d464a, type: 3}
   killClip: {fileID: 8300000, guid: a33335d4ea52c4b44a09d5f21f7915f1, type: 3}
   loseClip: {fileID: 8300000, guid: 4adb5e848f53c4f22983f511db4048bf, type: 3}
+  growClip: {fileID: 8300000, guid: ca53275019f754cc0b897ab9af9b659c, type: 3}
 --- !u!4 &2030271265
 Transform:
   m_ObjectHideFlags: 0
