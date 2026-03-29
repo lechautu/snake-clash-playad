@@ -16,7 +16,7 @@ namespace SnakeClash.Core
         public Camera MainCamera => mainCamera;
 
         [Header("Settings")]
-        [SerializeField] private int winCoinTarget = 200;
+        [LunaPlaygroundField("Win Coin Target", 200, "Game Settings")] public int winCoinTarget = 200;
         [SerializeField] private int maxSegments = 50;
 
         public int MaxSegments => maxSegments;
@@ -29,7 +29,6 @@ namespace SnakeClash.Core
         private GameState _currentState = GameState.Boot;
         public GameState CurrentState => _currentState;
 
-        private static int _totalAttempts = 0;
         private int _currentCoins = 0;
         public int CurrentCoins => _currentCoins;
         public int WinCoinTarget => winCoinTarget;
@@ -39,7 +38,6 @@ namespace SnakeClash.Core
             if (Instance == null)
             {
                 Instance = this;
-                _totalAttempts++;
                 mainCamera = Camera.main;
             }
             else
@@ -102,18 +100,6 @@ namespace SnakeClash.Core
         public void StartGame()
         {
             SetState(GameState.Playing);
-        }
-
-        public void Retry()
-        {
-            // If user has already retried once (total attempts >= 2), redirect to store
-            if (_totalAttempts >= 2)
-            {
-                InstallFullGame();
-                return;
-            }
-
-            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
         }
 
         public void InstallFullGame()

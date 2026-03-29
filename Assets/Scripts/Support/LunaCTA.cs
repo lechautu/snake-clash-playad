@@ -10,15 +10,6 @@ namespace SnakeClash.Support
     /// </summary>
     public class LunaCTA : MonoBehaviour
     {
-        private void Start()
-        {
-            Button btn = GetComponent<Button>();
-            if (btn != null)
-            {
-                btn.onClick.AddListener(OnClicked);
-            }
-        }
-
         public void OnClicked()
         {
             if (GameManager.Instance != null)

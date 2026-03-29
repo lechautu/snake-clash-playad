@@ -12,13 +12,15 @@ namespace SnakeClash.Resources
 
         [Header("Settings")]
         [SerializeField] private GameObject chestPrefab;
-        [SerializeField] private PlayerSnakeController player;
         [SerializeField] private OffScreenIndicator chestIndicator;
         [SerializeField] private Transform initialSpawnPoint;
 
+        [LunaPlaygroundField("Level Require Increment", 50, "Chest Settings")] public int levelRequireIncrement = 50;
+
+
         private GameObject _spawnedChest = null;
         public GameObject ActiveChest => _spawnedChest;
-        
+
         private int _currentLevelRequirement = 5;
         public int CurrentLevelRequirement => _currentLevelRequirement;
 
@@ -56,7 +58,7 @@ namespace SnakeClash.Resources
         private void SpawnChest(Vector3? fixedPosition = null)
         {
             if (chestPrefab == null) return;
-            
+
             Vector3 spawnPos;
             if (fixedPosition.HasValue)
             {
@@ -70,7 +72,7 @@ namespace SnakeClash.Resources
             }
 
             _spawnedChest = Instantiate(chestPrefab, spawnPos, Quaternion.identity, transform);
-            
+
             ChestPickup chest = _spawnedChest.GetComponent<ChestPickup>();
             if (chest != null)
             {
@@ -78,7 +80,7 @@ namespace SnakeClash.Resources
             }
 
             // Increase requirement for NEXT chest
-            _currentLevelRequirement += 50;
+            _currentLevelRequirement += levelRequireIncrement;
 
             if (chestIndicator != null)
             {

@@ -85,10 +85,5 @@ namespace SnakeClash.UI
                 retryButton.gameObject.SetActive(true);
             }
         }
-
-        public void OnRetryClicked()
-        {
-            GameManager.Instance.Retry();
-        }
     }
 }

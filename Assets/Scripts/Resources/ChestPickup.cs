@@ -7,7 +7,7 @@ namespace SnakeClash.Resources
     public class ChestPickup : MonoBehaviour
     {
         [Header("Settings")]
-        [SerializeField] private int coinsPerChest = 20;
+        [LunaPlaygroundField("Coins Per Chest", 20, "Chest Settings")] public int coinsPerChest = 20;
         [SerializeField] private float burstRange = 4f;
         [SerializeField] private float burstTotalDuration = 0.5f;
         [SerializeField] private Animator animator;
@@ -16,7 +16,7 @@ namespace SnakeClash.Resources
 
         private bool _isOpening = false;
         private int _requiredLevel = 0;
-        
+
         public int RequiredLevel => _requiredLevel;
 
         public void Initialize(int level)
@@ -40,7 +40,7 @@ namespace SnakeClash.Resources
                 camTransform = GameManager.Instance.MainCamera.transform;
 
             if (animator == null) animator = GetComponent<Animator>();
-            
+
             // Reset state for potential reuse/pooling
             transform.localScale = Vector3.one;
         }
@@ -121,7 +121,7 @@ namespace SnakeClash.Resources
                 coin.transform.position = transform.position;
                 Vector2 randomCircle = Random.insideUnitCircle * burstRange;
                 Vector3 targetPos = transform.position + new Vector3(randomCircle.x, 0, randomCircle.y);
-                
+
                 coin.StartTossAnimation(targetPos, 0.4f); // Quick 0.4s toss animation
             }
         }
