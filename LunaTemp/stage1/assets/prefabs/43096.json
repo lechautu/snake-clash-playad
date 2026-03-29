@@ -1,1 +1,0 @@
-{"id":43096,"path":"Assets\/Prefabs\/FoodItem.prefab","assetBundleId":-1,"components":[{"type":2,"id":43134,"data":[0,0,0,0.5,0.5,0.5,0,0,0,1]},{"type":6,"id":43136,"data":[7,746]},{"type":8,"id":43138,"data":[null,null,1,9,42642,[9,42642],1,1,0,0,-1,-1,1,1,0,0,1,1]},{"type":3,"id":43038,"enabled":1,"class":10,"data":[1]}],"children":[],"data":["FoodItem",7,1,0,0]}
